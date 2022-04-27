@@ -6,18 +6,17 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 
 export default function App() {
-  let [selectedCard, setselectedCard] = useState(false);
-  let [isImagePopupOpen, setIsImagePopupOpen] = React.useState({});
+  const [selectedCard, setselectedCard] = useState({});
+  const [isImagePopupOpen, setIsImagePopupOpen] = React.useState(false);
 
-  let [isEditAvatarPopupOpen, setOpenEditAvatarPopup] = useState(false);
-  let [isEditProfilePopupOpen, setOpenPopupEditProfile] = useState(false);
-  let [isAddPlacePopupOpen, setOpenAddPlacePopup] = useState(false);
-  let [isDeleteCardPopupOpen, setOpenDeleteCardPopup] = useState(false);
+  const [isEditAvatarPopupOpen, setOpenEditAvatarPopup] = useState(false);
+  const [isEditProfilePopupOpen, setOpenPopupEditProfile] = useState(false);
+  const [isAddPlacePopupOpen, setOpenAddPlacePopup] = useState(false);
+  const [isDeleteCardPopupOpen, setOpenDeleteCardPopup] = useState(false);
 
   function handleCardClick(card) {
-    setselectedCard(true);
-    setIsImagePopupOpen(card);
-    console.log(card);
+    setIsImagePopupOpen(true);
+    setselectedCard(card);
   }
 
   const handleEditAvatarClick = () => {
@@ -33,7 +32,6 @@ export default function App() {
   }
 
   const handleDeleteClickCard = () => {
-    console.log('Delete Card');
     setOpenDeleteCardPopup(true);
   }
 
@@ -42,7 +40,8 @@ export default function App() {
     setOpenPopupEditProfile(false);
     setOpenAddPlacePopup(false);
     setOpenDeleteCardPopup(false);
-    setselectedCard(false);
+    setIsImagePopupOpen(false);
+    setselectedCard({});
   }
 
   return (
@@ -50,7 +49,7 @@ export default function App() {
       <Header />
       <Main onEditAvatar = {handleEditAvatarClick} onEditProfile={handleEditProfileClick} onAddPlace = {handleAddPlaceClick} onDeleteCard = {handleDeleteClickCard} onCardClick = {handleCardClick}/>
       <Footer />
-      { selectedCard && <ImagePopup card={isImagePopupOpen} onClose={closeAllPopups} isOpen={selectedCard} /> }
+      { isImagePopupOpen && <ImagePopup card={selectedCard} onClose={closeAllPopups} isOpen={isImagePopupOpen} /> }
 
       {
         isEditAvatarPopupOpen && <PopupWithForm

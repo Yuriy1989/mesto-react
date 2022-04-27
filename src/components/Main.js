@@ -34,7 +34,6 @@ function Main( {onEditAvatar, onEditProfile, onAddPlace, onDeleteCard, onCardCli
             idUserCreateCard: cardData.owner._id
           }
         })
-        // console.log('formattedCard', formattedCard);
         setCardData(formattedCard);
       })
       .catch((res) => console.log(res))
